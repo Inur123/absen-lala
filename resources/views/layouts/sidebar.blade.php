@@ -4,14 +4,11 @@
 
     <!-- Sidebar header -->
     <div class="flex h-14 items-center border-b px-4">
-        <div @click="showLogoutModal = true"
-            class="flex items-center gap-2 cursor-pointer hover:bg-accent rounded-md p-1 transition-colors duration-200 w-full">
-            <div class="flex h-8 w-8 items-center justify-center rounded-md bg-black text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
-                    <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
-                </svg>
+        <div class="flex items-center gap-2 cursor-pointer hover:bg-accent rounded-md p-1 transition-colors duration-200 w-full">
+            <div class="flex h-8 w-8 items-center justify-center rounded-md text-white overflow-hidden">
+                <img src="{{ asset('images/logo-lala.png') }}" alt="Icon" class="h-8 w-8 object-contain">
             </div>
+
             <div>
                 <p class="text-sm font-semibold">Admin System</p>
                 <p class="text-xs text-muted-foreground">Management Panel</p>
@@ -31,7 +28,8 @@
         <div class="px-3 py-2">
             <div class="space-y-1">
                 <a href="{{ route('dashboard') }}"
-                    class="flex w-full items-center gap-3 rounded-md px-4 py-2 text-sm font-medium bg-accent text-accent-foreground">
+                    class="flex w-full items-center gap-3 rounded-md px-4 py-2 text-sm font-medium
+        {{ request()->routeIs('dashboard') ? 'bg-gray-200 text-gray-900' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" class="h-4 w-4">
@@ -43,8 +41,11 @@
                     Dashboard
                 </a>
 
-                <a href=""
-                    class="flex w-full items-center gap-3 rounded-md px-4 py-2 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground">
+
+
+                <a href="{{ route('peserta.index') }}"
+                    class="flex w-full items-center gap-3 rounded-md px-4 py-2 text-sm font-medium
+        {{ request()->routeIs('peserta.*') ? 'bg-gray-200 text-gray-900' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" class="h-4 w-4">
@@ -55,6 +56,8 @@
                     </svg>
                     Peserta
                 </a>
+
+
 
                 <div class="relative">
                     <button @click="absensiOpen = !absensiOpen"
@@ -101,24 +104,26 @@
     <!-- Sidebar footer -->
     <div class="mt-auto border-t p-4">
         <div class="flex items-center gap-3">
-            <div class="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-primary-foreground">
-                <span class="text-sm font-medium">A</span>
+            <div class="flex h-9 w-9 items-center justify-center rounded-full bg-black text-white">
+                <span class="text-sm font-medium">
+                    {{ collect(explode(' ', Auth::user()->name))->take(2)->map(fn($word) => strtoupper(Str::substr($word, 0, 1)))->implode('') }}
+                </span>
             </div>
+
             <div>
                 <p class="text-sm font-medium">{{ Auth::user()->name }}</p>
 
             </div>
             <button @click="showLogoutModal = true"
-    class="ml-auto rounded-full p-1 text-muted-foreground hover:bg-accent hover:text-accent-foreground cursor-pointer">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-        stroke-linejoin="round" class="h-4 w-4">
-        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-        <polyline points="16 17 21 12 16 7" />
-        <line x1="21" y1="12" x2="9" y2="12" />
-    </svg>
-</button>
-
+                class="ml-auto rounded-full p-1 text-muted-foreground hover:bg-accent hover:text-accent-foreground cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="h-4 w-4">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                    <polyline points="16 17 21 12 16 7" />
+                    <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+            </button>
         </div>
     </div>
 </aside>

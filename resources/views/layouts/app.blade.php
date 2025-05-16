@@ -3,6 +3,9 @@
     darkMode: localStorage.getItem('darkMode') === 'true',
     sidebarOpen: window.innerWidth >= 1024,
     absensiOpen: false,
+    showAddModal: false,
+    showEditModal: false,
+    editData: {},
     showLogoutModal: false,
     toggleDarkMode() {
         this.darkMode = !this.darkMode;
@@ -17,7 +20,8 @@
     logout() {
         window.location.href = 'index.html';
     }
-}" x-init="$watch('darkMode', val => document.documentElement.classList.toggle('dark', val))" :class="{ 'dark': darkMode }">
+}"
+ x-init="$watch('darkMode', val => document.documentElement.classList.toggle('dark', val))" :class="{ 'dark': darkMode }">
 
 <head>
     <meta charset="UTF-8">
@@ -25,6 +29,7 @@
     <title>@yield('title', 'Admin System')</title>
     <link rel="icon" href="{{ asset('images/logo-lala.png') }}" type="image/x-icon">
     @vite(['resources/js/app.js', 'resources/css/app.css'])
+
 </head>
 
 <body class="antialiased">

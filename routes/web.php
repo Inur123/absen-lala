@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PesertaController;
 
 // Redirect root to /login
 Route::redirect('/', '/login');
@@ -14,9 +15,11 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Protected Routes
 Route::middleware(['auth'])->group(function () {
+
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-
-    // Tambahkan route protected lainnya di sini
+     Route::resource('peserta', PesertaController::class);
 });
+
+
