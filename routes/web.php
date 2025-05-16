@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PesertaController;
+use App\Http\Controllers\DashboardController;
 
 // Redirect root to /login
 Route::redirect('/', '/login');
@@ -16,10 +17,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // Protected Routes
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-     Route::resource('peserta', PesertaController::class);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('peserta', PesertaController::class);
 });
 
 

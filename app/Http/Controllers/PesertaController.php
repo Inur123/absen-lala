@@ -51,4 +51,5 @@ class PesertaController extends Controller
 
     return redirect()->route('peserta.index')->with('success', 'Peserta berhasil dihapus');
 }
+
 }
