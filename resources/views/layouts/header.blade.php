@@ -23,7 +23,7 @@
   <div class="ml-auto flex items-center gap-2">
     <button
       @click="toggleDarkMode"
-      class="rounded-md p-1 text-muted-foreground hover:bg-accent hover:text-accent-foreground">
+      class="rounded-md p-1 text-muted-foreground hover:bg-accent hover:text-accent-foreground cursor-pointer">
       <svg x-show="!darkMode" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
         <circle cx="12" cy="12" r="4" />
         <path d="M12 2v2" />
@@ -41,7 +41,7 @@
     </button>
     <button
       @click="showLogoutModal = true"
-      class="rounded-md p-1 text-muted-foreground hover:bg-accent hover:text-accent-foreground">
+      class="rounded-md p-1 text-muted-foreground hover:bg-accent hover:text-accent-foreground cursor-pointer">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
         <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
         <polyline points="16 17 21 12 16 7" />
