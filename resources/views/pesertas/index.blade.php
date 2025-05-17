@@ -9,7 +9,7 @@
             </div>
            <button
     @click="showAddModal = true"
-    class="inline-flex items-center justify-center whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 cursor-pointer bg-black text-white"
+    class="inline-flex items-center justify-center whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 cursor-pointer bg-black text-white"title="Tambah Peserta"
 >
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -57,7 +57,9 @@
                                     <div class="flex items-center gap-2">
                                         <!-- Edit Button -->
                                         <button @click="showEditModal = true; editData = {{ json_encode($peserta) }}"
-                                            class="rounded-md p-1 cursor-pointer transition-colors hover:bg-gray-400 dark:hover:bg-accent">
+                                            class="rounded-md p-1 cursor-pointer transition-colors hover:bg-gray-400 dark:hover:bg-accent"
+                                            title="Edit Peserta">
+
                                             <i class="ri-pencil-line text-2xl"
                                                 :class="darkMode ? 'text-white' : 'text-black'"></i>
                                         </button>
@@ -77,7 +79,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
-                                                class="rounded-md p-1 cursor-pointer transition-colors hover:bg-gray-400 dark:hover:bg-accent">
+                                                class="rounded-md p-1 cursor-pointer transition-colors hover:bg-gray-400 dark:hover:bg-accent "title="Hapus Peserta">
                                                 <i class="ri-delete-bin-5-line text-2xl"
                                                     :class="darkMode ? 'text-white' : 'text-black'"></i>
                                             </button>

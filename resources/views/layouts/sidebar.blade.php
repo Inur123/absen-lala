@@ -60,50 +60,50 @@
 
 
 
-                <div class="relative" x-data="{ absensiOpen: {{ request()->routeIs('materi.*') ||
-                        request()->routeIs('absensi.  *') || request()->routeIs('scan.absen.*') ? 'true' : 'false' }} }">
-                    <button @click="absensiOpen = !absensiOpen"
-                        class="flex w-full items-center justify-between rounded-md px-4 py-2 text-sm font-medium
-                        {{ request()->routeIs('materi.*') || request()->routeIs('absensi.*') || request()->routeIs('scan.absen.*') ? 'bg-gray-200 text-gray-900' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
+                <div class="relative" x-data="{ absensiOpen: {{ (request()->routeIs('materi.*') || request()->routeIs('absensi.*')) ? 'true' : 'false' }} }">
+    <button @click="absensiOpen = !absensiOpen"
+        class="flex w-full items-center justify-between rounded-md px-4 py-2 text-sm font-medium
+        {{ (request()->routeIs('materi.*') || request()->routeIs('absensi.*')) ? 'bg-gray-200 text-gray-900' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
 
-                        <div class="flex items-center gap-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="h-4 w-4">
-                                <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
-                                <line x1="16" x2="16" y1="2" y2="6" />
-                                <line x1="8" x2="8" y1="2" y2="6" />
-                                <line x1="3" x2="21" y1="10" y2="10" />
-                                <path d="m9 16 2 2 4-4" />
-                            </svg>
-                            Absensi
-                        </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="h-4 w-4 transition-transform"
-                            :class="absensiOpen ? 'rotate-180' : ''">
-                            <path d="m6 9 6 6 6-6" />
-                        </svg>
-                    </button>
+        <div class="flex items-center gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" class="h-4 w-4">
+                <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+                <line x1="16" x2="16" y1="2" y2="6" />
+                <line x1="8" x2="8" y1="2" y2="6" />
+                <line x1="3" x2="21" y1="10" y2="10" />
+                <path d="m9 16 2 2 4-4" />
+            </svg>
+            Absensi
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" class="h-4 w-4 transition-transform"
+            :class="absensiOpen ? 'rotate-180' : ''">
+            <path d="m6 9 6 6 6-6" />
+        </svg>
+    </button>
 
-                    <div x-show="absensiOpen" class="pl-4 mt-1" x-transition>
-                        <a href=""
-                            class="flex w-full items-center rounded-md px-4 py-2 text-sm
-                             {{ request()->routeIs('data.absensi.*') ? 'bg-gray-200 text-gray-900' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
-                            Data Absensi
-                        </a>
-                        <a href="{{ route('materi.index') }}"
-                            class="flex w-full items-center rounded-md px-4 py-2 text-sm
-                             {{ request()->routeIs('materi.*') ? 'bg-gray-200 text-gray-900' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
-                            Buat Absensi
-                        </a>
-                        <a href=""
-                            class="flex w-full items-center rounded-md px-4 py-2 text-sm
-                            {{ request()->routeIs('scan.absen.*') ? 'bg-gray-200 text-gray-900' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
-                            Scan Absen
-                        </a>
-                    </div>
-                </div>
+    <div x-show="absensiOpen" class="pl-4 mt-1" x-transition>
+        <a href=""
+            class="flex w-full items-center rounded-md px-4 py-2 text-sm
+            {{ request()->routeIs('data.absensi.*') ? 'bg-gray-200 text-gray-900' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
+            Data Absensi
+        </a>
+        <a href="{{ route('materi.index') }}"
+            class="flex w-full items-center rounded-md px-4 py-2 text-sm
+            {{ request()->routeIs('materi.*') ? 'bg-gray-200 text-gray-900' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
+            Buat Absensi
+        </a>
+        <a href="{{ route('absensi.index') }}"
+            class="flex w-full items-center rounded-md px-4 py-2 text-sm
+            {{ request()->routeIs('absensi.*') ? 'bg-gray-200 text-gray-900' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
+            Scan Absen
+        </a>
+    </div>
+</div>
+
             </div>
         </div>
     </div>

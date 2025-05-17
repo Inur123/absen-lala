@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MateriController;
+use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\DashboardController;
 
@@ -21,6 +22,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('peserta', PesertaController::class);
     Route::resource('materi', MateriController::class);
+    Route::resource('absensi', AbsensiController::class);
+    Route::post('absensi/scan', [AbsensiController::class, 'scanQr'])->name('absensi.scan');
+ Route::get('/absensi/scan/{materi}', [AbsensiController::class, 'showScanPage'])->name('absensi.scan.page');
 });
 
 

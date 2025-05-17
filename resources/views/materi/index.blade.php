@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Absensi')
+@section('title', 'Materi')
 @section('content')
     <div class="flex flex-col gap-4" x-data="{
         showModal: false,
@@ -39,7 +39,7 @@
                 <p class="text-muted-foreground">Buat dan kelola data absensi baru.</p>
             </div>
             <button @click="showModal = true"
-                class="inline-flex items-center justify-center whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-black text-white cursor-pointer">
+                class="inline-flex items-center justify-center whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-black text-white cursor-pointer"title="Buat Absensi Baru">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="mr-2 h-4 w-4">
@@ -82,7 +82,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
-                                    class="inline-flex items-center justify-center whitespace-nowrap rounded-md bg-white px-3 py-2 text-xs font-medium text-black shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black disabled:pointer-events-none disabled:opacity-50 cursor-pointer">
+                                    class="inline-flex items-center justify-center whitespace-nowrap rounded-md bg-white px-3 py-2 text-xs font-medium text-black shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-black disabled:pointer-events-none disabled:opacity-50 cursor-pointer"title="Hapus Materi">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                         stroke-linecap="round" stroke-linejoin="round" class="mr-2 h-3 w-3">
