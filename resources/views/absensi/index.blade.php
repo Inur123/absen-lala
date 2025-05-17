@@ -22,19 +22,21 @@
 
                         </div>
                         <p class="text-sm text-slate-500">
-                             {{ $materi->deskripsi ?? 'Tidak ada deskripsi' }}
+                            {{ $materi->deskripsi ?? 'Tidak ada deskripsi' }}
                         </p>
                         <div class="space-y-2">
                             <div class="flex items-center justify-between text-sm">
-                                <span class="text-muted-foreground">Kehadiran</span>
-                                <span class="font-medium">{{ $jumlahHadir }}/{{ $totalPeserta }}</span>
+                                <span class="text-muted-foreground">Kehadiran {{ $materi->nama }}</span>
+                                <span class="font-medium">
+                                    {{ $jumlahHadirPerMateri[$materi->id] ?? 0 }}/{{ $totalPeserta }}
+                                </span>
                             </div>
                             <div class="relative w-full h-2 rounded-full bg-gray-200 overflow-hidden">
                                 <div class="absolute top-0 left-0 h-full bg-gray-900 rounded-full"
-                                    style="width: {{ $persentaseHadir }}%;"></div>
+                                    style="width: {{ $persentasePerMateri[$materi->id] ?? 0 }}%;"></div>
                             </div>
                             <div class="text-xs text-muted-foreground text-right">
-                                {{ $persentaseHadir }}%
+                                {{ $persentasePerMateri[$materi->id] ?? 0 }}%
                             </div>
                         </div>
 

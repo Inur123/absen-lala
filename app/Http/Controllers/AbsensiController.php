@@ -11,22 +11,37 @@ use Illuminate\Support\Facades\Log;
 class AbsensiController extends Controller
 {
     // Menampilkan daftar absensi
-    public function index()
-    {
-        $absensis = Absensi::with(['peserta', 'materi'])->get();
-        $materis = Materi::all();
+   public function index()
+{
+    $materis = Materi::all();
 
-        // Hitung total peserta
-        $totalPeserta = Peserta::count();
+    // Total peserta (sama untuk semua materi)
+    $totalPeserta = Peserta::count();
 
-        // Hitung total kehadiran (absen status = 'Hadir')
-        $jumlahHadir = Absensi::where('status', 'Hadir')->distinct('peserta_id')->count('peserta_id');
+    // Siapkan array untuk menyimpan data persentase per materi
+    $persentasePerMateri = [];
+    $jumlahHadirPerMateri = [];
 
-        // Hitung persentase
-        $persentaseHadir = $totalPeserta > 0 ? round(($jumlahHadir / $totalPeserta) * 100) : 0;
+    foreach ($materis as $materi) {
+        // Hitung jumlah peserta yang hadir untuk materi ini (status = Hadir dan materi_id sesuai)
+        $jumlahHadir = Absensi::where('status', 'Hadir')
+                              ->where('materi_id', $materi->id)
+                              ->distinct('peserta_id')
+                              ->count('peserta_id');
 
-        return view('absensi.index', compact('absensis', 'materis', 'totalPeserta', 'jumlahHadir', 'persentaseHadir'));
+        // Simpan jumlah hadir per materi
+        $jumlahHadirPerMateri[$materi->id] = $jumlahHadir;
+
+        // Hitung persentase hadir untuk materi ini
+        $persentasePerMateri[$materi->id] = $totalPeserta > 0 ? round(($jumlahHadir / $totalPeserta) * 100) : 0;
     }
+
+    // Ambil semua absensi (bisa dipakai kalau mau menampilkan data detail absensi)
+    $absensis = Absensi::with(['peserta', 'materi'])->get();
+
+    return view('absensi.index', compact('absensis', 'materis', 'totalPeserta', 'jumlahHadirPerMateri', 'persentasePerMateri'));
+}
+
 
     // Menampilkan halaman scan untuk materi tertentu
     public function showScanPage($materi_id)
@@ -55,7 +70,7 @@ class AbsensiController extends Controller
             ->where('materi_id', $request->materi_id)
             ->exists()
         ) {
-            return back()->with('error', 'Peserta sudah melakukan absen untuk materi ini');
+            return back()->with('error', 'Anda sudah melakukan absen untuk materi ini');
         }
 
         Absensi::create([
@@ -88,65 +103,72 @@ class AbsensiController extends Controller
         return back()->with('success', 'Absensi berhasil dihapus');
     }
 
-    public function scanQr(Request $request)
-    {
-        $request->validate([
-            'qrcode' => 'required',
-            'materi_id' => 'required|exists:materis,id'
-        ]);
+   public function scanQr(Request $request)
+{
+    $request->validate([
+        'qrcode' => 'required',
+        'materi_id' => 'required|exists:materis,id'
+    ]);
+    // Try different methods to find the participant
+    $peserta = Peserta::find($request->qrcode);
 
-        // Same verification logic as scanQr but without saving
-        $peserta = Peserta::find($request->qrcode);
+    if (!$peserta && preg_match('/\/peserta\/(\d+)/', $request->qrcode, $matches)) {
+        $id = $matches[1];
+        $peserta = Peserta::find($id);
+    }
 
-        if (!$peserta && preg_match('/\/peserta\/(\d+)/', $request->qrcode, $matches)) {
-            $id = $matches[1];
-            $peserta = Peserta::find($id);
-        }
+    if (!$peserta) {
+        $peserta = Peserta::where('qrcode', 'like', '%' . $request->qrcode . '%')->first();
+    }
 
-        if (!$peserta) {
-            $peserta = Peserta::where('qrcode', 'like', '%' . $request->qrcode . '%')->first();
-        }
+    if (!$peserta) {
+        $peserta = Peserta::where('qrcode', 'qrcodes/' . $request->qrcode . '.png')->first();
+    }
 
-        if (!$peserta) {
-            $peserta = Peserta::where('qrcode', 'qrcodes/' . $request->qrcode . '.png')->first();
-        }
+    if (!$peserta && preg_match('/(\d+)\.png$/', $request->qrcode, $matches)) {
+        $id = $matches[1];
+        $peserta = Peserta::find($id);
+    }
 
-        if (!$peserta && preg_match('/(\d+)\.png$/', $request->qrcode, $matches)) {
-            $id = $matches[1];
-            $peserta = Peserta::find($id);
-        }
-
-        if (!$peserta) {
-            return response()->json([
-                'success' => false,
-                'error' => 'Peserta tidak ditemukan',
-                'qrcode' => $request->qrcode
-            ], 404);
-        }
-
-        $materi = Materi::find($request->materi_id);
-
-        // Check if already attended
-        $existingAbsensi = Absensi::where('peserta_id', $peserta->id)
-            ->where('materi_id', $request->materi_id)
-            ->first();
-
-        if ($existingAbsensi) {
-            return response()->json([
-                'success' => false,
-                'error' => 'Peserta sudah melakukan absen untuk materi ini',
-                'peserta' => $peserta,
-                'absensi' => $existingAbsensi
-            ], 400);
-        }
-
+    if (!$peserta) {
         return response()->json([
-            'success' => true,
-            'message' => 'Peserta ditemukan',
+            'success' => false,
+            'message' => 'Peserta tidak ditemukan',
+            'qrcode' => $request->qrcode
+        ], 404);
+    }
+
+    $materi = Materi::find($request->materi_id);
+
+    // Check if attendance already exists
+    $existingAbsensi = Absensi::where('peserta_id', $peserta->id)
+                            ->where('materi_id', $request->materi_id)
+                            ->first();
+
+    if ($existingAbsensi) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Anda sudah melakukan absen untuk materi ini',
             'peserta' => $peserta,
             'materi' => $materi
-        ]);
+        ], 400);
     }
+
+    // Create new attendance record
+    $absensi = Absensi::create([
+        'peserta_id' => $peserta->id,
+        'materi_id' => $request->materi_id,
+        'status' => 'Hadir'
+    ]);
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Absensi berhasil dicatat',
+        'peserta' => $peserta,
+        'materi' => $materi,
+        'absensi' => $absensi
+    ]);
+}
 
     // API untuk scan QR code - IMPROVED VERSION
     // public function scanQr(Request $request)

@@ -10,7 +10,7 @@
                 notificationType = $event.detail.type;
                 notificationData = $event.detail.data;
                 showNotification = true;
-                setTimeout(() => showNotification = false, 5000);
+                setTimeout(() => showNotification = false, 2000);
              "
             class="fixed inset-0 z-50 flex items-center justify-center">
             <div x-bind:class="{
@@ -57,7 +57,7 @@
                 <p class="text-gray-500">Scan QR Code peserta untuk melakukan absensi.</p>
             </div>
             <a href="{{ route('absensi.index') }}"
-                class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-gray-200 bg-white px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-400 disabled:pointer-events-none disabled:opacity-50">
+                class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-gray-200 bg-black text-white px-4 py-2 text-sm font-medium shadow-sm transition-colors  focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-400 disabled:pointer-events-none disabled:opacity-50">
                 <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
@@ -162,7 +162,7 @@
                                                 </div>
                                             @else
                                                 <div
-                                                    class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800">
+                                                    class="inline-flex items-center rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-500">
                                                     Belum Hadir
                                                 </div>
                                             @endif
@@ -175,34 +175,16 @@
                 </div>
                 <div class="p-4 border-t">
                     <div class="flex justify-between items-center">
-                        <div class="text-sm text-gray-500">
-                            Menampilkan 1-{{ $pesertas->count() }} dari {{ $pesertas->count() }} peserta
-                        </div>
                         <div class="flex items-center gap-2">
-                            <button
-                                class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-gray-200 bg-white px-3 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-gray-50 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-400 disabled:pointer-events-none disabled:opacity-50">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" class="mr-2 h-4 w-4">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                                    <polyline points="7 10 12 15 17 10" />
-                                    <line x1="12" x2="12" y1="15" y2="3" />
-                                </svg>
-                                Export Data
-                            </button>
-                            <a href="{{ route('absensi.index') }}"
-                                class="inline-flex items-center justify-center whitespace-nowrap rounded-md bg-blue-600 px-3 py-2 text-sm font-medium text-white shadow transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-400 disabled:pointer-events-none disabled:opacity-50">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" class="mr-2 h-4 w-4">
-                                    <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
-                                    <polyline points="14 2 14 8 20 8" />
-                                    <path d="M16 13H8" />
-                                    <path d="M16 17H8" />
-                                    <path d="M10 9H8" />
-                                </svg>
-                                Lihat Semua
-                            </a>
+
+                           <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-input bg-background px-3 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-black text-white cursor-pointer">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 h-4 w-4">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" x2="12" y1="15" y2="3" />
+                      </svg>
+                      Export Data
+                    </button>
                         </div>
                     </div>
                 </div>
@@ -241,6 +223,7 @@
                 scanAnimation.style.display = 'block';
                 scanInstruction.textContent = 'Arahkan kamera ke QR Code peserta';
                 scanSuccess.style.display = 'none';
+
             }
 
             function updateUIForIdle() {
@@ -278,7 +261,7 @@
                         console.log('Verification response:', data);
 
                         if (data.success) {
-                            showNotification('Absensi berhasil dicatat', 'success', {
+                            showNotification('Absensi berhasil', 'success', {
                                 nama: data.peserta.nama,
                                 asal_delegasi: data.peserta.asal_delegasi,
                                 materi: data.materi.nama

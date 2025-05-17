@@ -24,7 +24,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('materi', MateriController::class);
     Route::resource('absensi', AbsensiController::class);
     Route::post('absensi/scan', [AbsensiController::class, 'scanQr'])->name('absensi.scan');
- Route::get('/absensi/scan/{materi}', [AbsensiController::class, 'showScanPage'])->name('absensi.scan.page');
+    Route::get('/absensi/scan/{materi}', [AbsensiController::class, 'showScanPage'])->name('absensi.scan.page');
 });
 
 
