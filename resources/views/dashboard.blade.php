@@ -57,25 +57,7 @@
                     <h3 class="text-sm font-medium">Total Absensi</h3>
                 </div>
                 <div class="mt-3">
-                    <p class="text-2xl font-bold" x-text="absensiStats.total"></p>
-                    <p class="text-xs text-muted-foreground">
-                        <span class="text-green-500 dark:text-green-400"><span
-                                x-text="absensiStats.averageAttendance"></span>%</span> rata-rata kehadiran
-                    </p>
-                </div>
-                <div class="mt-4 grid grid-cols-3 gap-2 text-xs text-muted-foreground">
-                    <div class="flex flex-col items-center rounded-md bg-secondary p-1">
-                        <span class="font-medium text-foreground" x-text="absensiStats.active"></span>
-                        <span>Aktif</span>
-                    </div>
-                    <div class="flex flex-col items-center rounded-md bg-secondary p-1">
-                        <span class="font-medium text-foreground" x-text="absensiStats.completed"></span>
-                        <span>Selesai</span>
-                    </div>
-                    <div class="flex flex-col items-center rounded-md bg-secondary p-1">
-                        <span class="font-medium text-foreground" x-text="absensiStats.upcoming"></span>
-                        <span>Mendatang</span>
-                    </div>
+                    <p class="text-2xl font-bold">1</p>
                 </div>
             </div>
 
@@ -95,7 +77,7 @@
                     <h3 class="text-sm font-medium">Aksi Cepat</h3>
                 </div>
                 <div class="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
-                    <a href="" class="flex flex-col items-center rounded-lg border p-3 hover:bg-accent">
+                    <a href="{{ route('peserta.index') }}" class="flex flex-col items-center rounded-lg border p-3 hover:bg-accent">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round" class="h-6 w-6 text-primary">
@@ -106,7 +88,7 @@
                         </svg>
                         <span class="mt-2 text-xs font-medium">Tambah Peserta</span>
                     </a>
-                    <a href="" class="flex flex-col items-center rounded-lg border p-3 hover:bg-accent">
+                    <a href="{{ route('materi.index') }}" class="flex flex-col items-center rounded-lg border p-3 hover:bg-accent">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round" class="h-6 w-6 text-primary">
@@ -151,42 +133,7 @@
         </div>
 
         <!-- Recent Absensi -->
-        <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
-            <div class="p-6">
-                <div class="flex items-center justify-between">
-                    <h3 class="text-lg font-medium">Absensi Terbaru</h3>
-                    <a href="" class="text-sm text-primary hover:underline">
-                        Lihat Semua
-                    </a>
-                </div>
-                <div class="mt-4 space-y-4">
-                    <template x-for="item in recentAbsensi" :key="item.id">
-                        <div class="flex items-center justify-between rounded-lg border p-4">
-                            <div class="space-y-1">
-                                <h4 class="font-medium" x-text="item.nama"></h4>
-                                <p class="text-xs text-muted-foreground" x-text="item.tanggal"></p>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <div class="text-right">
-                                    <p class="text-sm font-medium" x-text="`${item.pesertaHadir}/${item.totalPeserta}`">
-                                    </p>
-                                    <p class="text-xs text-muted-foreground"
-                                        x-text="`${getAttendancePercentage(item)}% Hadir`"></p>
-                                </div>
-                                <a href="" class="rounded-full bg-primary/10 p-2 text-primary hover:bg-primary/20">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
-                                        <path d="M5 12h14" />
-                                        <path d="m12 5 7 7-7 7" />
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </template>
-                </div>
-            </div>
-        </div>
+
 
         <!-- Peserta Overview -->
         <div class="grid gap-4 md:grid-cols-2">

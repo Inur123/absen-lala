@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Materi')
+@section('title', 'Absensi')
 @section('content')
     <div class="flex flex-col gap-4" x-data="{
         showModal: false,
