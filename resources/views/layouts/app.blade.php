@@ -1,35 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" x-data="{
-    darkMode: localStorage.getItem('darkMode') === 'true',
     sidebarOpen: window.innerWidth >= 1024,
     absensiOpen: false,
     showAddModal: false,
     showEditModal: false,
+
     editData: {},
     showLogoutModal: false,
-    toggleDarkMode() {
-        this.darkMode = !this.darkMode;
-        localStorage.setItem('darkMode', this.darkMode);
-    },
     toggleSidebar() {
-        this.sidebarOpen = !this.sidebarOpen;
+      this.sidebarOpen = !this.sidebarOpen;
     },
-    getAttendancePercentage(item) {
-        return Math.round((item.pesertaHadir / item.totalPeserta) * 100);
-    },
-    logout() {
-        window.location.href = 'index.html';
-    }
-}"
- x-init="$watch('darkMode', val => document.documentElement.classList.toggle('dark', val))" :class="{ 'dark': darkMode }">
-
+  }"
+>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@yield('title', 'Admin System')</title>
-    <link rel="icon" href="{{ asset('images/logo-lala.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('images/logo-lala.png') }}" type="image/x-icon" />
     @vite(['resources/js/app.js', 'resources/css/app.css'])
-
 </head>
 
 <body class="antialiased">
@@ -53,5 +41,4 @@
     <div x-show="sidebarOpen" @click="sidebarOpen = false"
         class="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm lg:hidden"></div>
 </body>
-
 </html>

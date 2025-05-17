@@ -4,7 +4,6 @@ import 'remixicon/fonts/remixicon.css';
 window.Alpine = Alpine
 
 Alpine.start()
-
         tailwind.config = {
             darkMode: 'class',
             theme: {
@@ -47,4 +46,5 @@ Alpine.start()
                 }
             }
         }
+
 

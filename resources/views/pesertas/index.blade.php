@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Dashboard')
+@section('title', 'Peserta')
 @section('content')
     <div class="flex flex-col gap-4">
         <div class="flex items-center justify-between">
@@ -7,18 +7,21 @@
                 <h1 class="text-2xl font-bold tracking-tight">Peserta</h1>
                 <p class="text-muted-foreground">Kelola data peserta kegiatan.</p>
             </div>
-            <button @click="showAddModal = true"
-                class="inline-flex items-center justify-center whitespace-nowrap rounded-md bg-black px-4 py-2 text-sm font-medium text-white shadow transition-colors hover:bg-gray-800 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="mr-2 h-4 w-4">
-                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                    <circle cx="9" cy="7" r="4" />
-                    <path d="M22 12h-4" />
-                    <path d="M20 10v4" />
-                </svg>
-                Tambah Peserta
-            </button>
+           <button
+    @click="showAddModal = true"
+    class="inline-flex items-center justify-center whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 cursor-pointer bg-black text-white"
+>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="mr-2 h-4 w-4">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M22 12h-4" />
+        <path d="M20 10v4" />
+    </svg>
+    Tambah Peserta
+</button>
+
         </div>
 
         <!-- Peserta Table -->
@@ -54,27 +57,32 @@
                                     <div class="flex items-center gap-2">
                                         <!-- Edit Button -->
                                         <button @click="showEditModal = true; editData = {{ json_encode($peserta) }}"
-                                            class="rounded-md p-1 text-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-900/30 cursor-pointer">
-                                          <i class="ri-edit-line text-2xl"></i>
-
+                                            class="rounded-md p-1 cursor-pointer transition-colors hover:bg-gray-400 dark:hover:bg-accent">
+                                            <i class="ri-pencil-line text-2xl"
+                                                :class="darkMode ? 'text-white' : 'text-black'"></i>
                                         </button>
+
                                         <!-- Download Button -->
                                         <a href="{{ asset('storage/' . $peserta->qrcode) }}"
                                             download="{{ 'qrcode_' . Str::slug($peserta->nama) . '.png' }}"
-                                            class="rounded-md p-1 text-green-600 hover:bg-green-50 dark:text-green-400 dark:hover:bg-green-900/30"
+                                            class="rounded-md p-1 cursor-pointer transition-colors hover:bg-gray-400 dark:hover:bg-accent"
                                             title="Unduh QR Code">
-                                            <i class="ri-download-line text-2xl"></i>
+                                            <i class="ri-download-line text-2xl"
+                                                :class="darkMode ? 'text-white' : 'text-black'"></i>
                                         </a>
+
                                         <!-- Delete Button -->
                                         <form action="{{ route('peserta.destroy', $peserta->id) }}" method="POST"
                                             onsubmit="return confirm('Yakin ingin menghapus data ini?')">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
-                                                class="rounded-md p-1 text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/30 cursor-pointer">
-                                               <i class="ri-delete-bin-5-line text-2xl"></i>
+                                                class="rounded-md p-1 cursor-pointer transition-colors hover:bg-gray-400 dark:hover:bg-accent">
+                                                <i class="ri-delete-bin-5-line text-2xl"
+                                                    :class="darkMode ? 'text-white' : 'text-black'"></i>
                                             </button>
                                         </form>
+
                                     </div>
                                 </td>
                             </tr>

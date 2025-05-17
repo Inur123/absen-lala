@@ -4,9 +4,10 @@
 
     <!-- Sidebar header -->
     <div class="flex h-14 items-center border-b px-4">
-        <div class="flex items-center gap-2 cursor-pointer hover:bg-accent rounded-md p-1 transition-colors duration-200 w-full">
+        <div
+            class="flex items-center gap-2 cursor-pointer hover:bg-accent rounded-md p-1 transition-colors duration-200 w-full">
             <div class="flex h-8 w-8 items-center justify-center rounded-md text-white overflow-hidden">
-                <img src="{{ asset('images/logo-lala.png') }}" alt="Icon" class="h-8 w-8 object-contain">
+                <img src="{{ asset('images/Black.png') }}" alt="Icon" class="h-8 w-8 object-contain">
             </div>
 
             <div>
@@ -59,9 +60,12 @@
 
 
 
-                <div class="relative">
+                <div class="relative" x-data="{ absensiOpen: {{ request()->routeIs('materi.*') ||
+                        request()->routeIs('absensi.  *') || request()->routeIs('scan.absen.*') ? 'true' : 'false' }} }">
                     <button @click="absensiOpen = !absensiOpen"
-                        class="flex w-full items-center justify-between rounded-md px-4 py-2 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground">
+                        class="flex w-full items-center justify-between rounded-md px-4 py-2 text-sm font-medium
+                        {{ request()->routeIs('materi.*') || request()->routeIs('absensi.*') || request()->routeIs('scan.absen.*') ? 'bg-gray-200 text-gray-900' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
+
                         <div class="flex items-center gap-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -82,17 +86,20 @@
                         </svg>
                     </button>
 
-                    <div x-show="absensiOpen" class="pl-4 mt-1">
+                    <div x-show="absensiOpen" class="pl-4 mt-1" x-transition>
                         <a href=""
-                            class="flex w-full items-center rounded-md px-4 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground">
+                            class="flex w-full items-center rounded-md px-4 py-2 text-sm
+                             {{ request()->routeIs('data.absensi.*') ? 'bg-gray-200 text-gray-900' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
                             Data Absensi
                         </a>
-                        <a href=""
-                            class="flex w-full items-center rounded-md px-4 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground">
+                        <a href="{{ route('materi.index') }}"
+                            class="flex w-full items-center rounded-md px-4 py-2 text-sm
+                             {{ request()->routeIs('materi.*') ? 'bg-gray-200 text-gray-900' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
                             Buat Absensi
                         </a>
                         <a href=""
-                            class="flex w-full items-center rounded-md px-4 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground">
+                            class="flex w-full items-center rounded-md px-4 py-2 text-sm
+                            {{ request()->routeIs('scan.absen.*') ? 'bg-gray-200 text-gray-900' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
                             Scan Absen
                         </a>
                     </div>
