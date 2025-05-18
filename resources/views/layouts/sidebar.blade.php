@@ -1,6 +1,7 @@
 <aside
-    class="fixed inset-y-0 left-0 z-50 flex h-full w-64 flex-col border-r bg-background transition-transform duration-300 lg:relative lg:translate-x-0"
+    class="fixed inset-y-0 left-0 z-50 flex h-full w-64 flex-col border-r bg-white transition-transform duration-300 lg:relative lg:translate-x-0"
     :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'">
+
 
     <!-- Sidebar header -->
     <div class="flex h-14 items-center border-b px-4">
@@ -60,10 +61,10 @@
 
 
 
-                <div class="relative" x-data="{ absensiOpen: {{ (request()->routeIs('materi.*') || request()->routeIs('absensi.*')) ? 'true' : 'false' }} }">
+               <div class="relative" x-data="{ absensiOpen: {{ request()->routeIs('materi.*') || request()->routeIs('absensi.*') || request()->routeIs('absensi-report.*') ? 'true' : 'false' }} }">
     <button @click="absensiOpen = !absensiOpen"
         class="flex w-full items-center justify-between rounded-md px-4 py-2 text-sm font-medium
-        {{ (request()->routeIs('materi.*') || request()->routeIs('absensi.*')) ? 'bg-gray-200 text-gray-900' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
+        {{ request()->routeIs('materi.*') || request()->routeIs('absensi.*') || request()->routeIs('absensi-report.*') ? 'bg-gray-200 text-gray-900' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
 
         <div class="flex items-center gap-3">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -86,9 +87,9 @@
     </button>
 
     <div x-show="absensiOpen" class="pl-4 mt-1" x-transition>
-        <a href=""
+        <a href="{{ route('absensi-report.index') }}"
             class="flex w-full items-center rounded-md px-4 py-2 text-sm
-            {{ request()->routeIs('data.absensi.*') ? 'bg-gray-200 text-gray-900' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
+            {{ request()->routeIs('absensi-report.*') ? 'bg-gray-200 text-gray-900' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
             Data Absensi
         </a>
         <a href="{{ route('materi.index') }}"

@@ -39,7 +39,7 @@
 
     <!-- Tombol Logout dengan warna merah -->
     <button type="button" onclick="document.getElementById('logout-form').submit()"
-        class="inline-flex items-center justify-center whitespace-nowrap rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white shadow transition-colors hover:bg-red-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-red-400 disabled:pointer-events-none disabled:opacity-50 cursor-pointer">
+        class="inline-flex items-center justify-center whitespace-nowrap rounded-md bg-black px-4 py-2 text-sm font-medium text-white shadow transition-colors hover:bg-gray-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-400 disabled:pointer-events-none disabled:opacity-50 cursor-pointer">
         Logout
     </button>
 </div>

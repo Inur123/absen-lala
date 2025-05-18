@@ -57,7 +57,7 @@
                     <h3 class="text-sm font-medium">Total Absensi</h3>
                 </div>
                 <div class="mt-3">
-                    <p class="text-2xl font-bold">1</p>
+                    <p class="text-2xl font-bold">{{ $totalAbsensi }}</p>
                 </div>
             </div>
 
@@ -77,7 +77,8 @@
                     <h3 class="text-sm font-medium">Aksi Cepat</h3>
                 </div>
                 <div class="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
-                    <a href="{{ route('peserta.index') }}" class="flex flex-col items-center rounded-lg border p-3 hover:bg-accent">
+                    <a href="{{ route('peserta.index') }}"
+                        class="flex flex-col items-center rounded-lg border p-3 hover:bg-accent">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round" class="h-6 w-6 text-primary">
@@ -88,7 +89,8 @@
                         </svg>
                         <span class="mt-2 text-xs font-medium">Tambah Peserta</span>
                     </a>
-                    <a href="{{ route('materi.index') }}" class="flex flex-col items-center rounded-lg border p-3 hover:bg-accent">
+                    <a href="{{ route('materi.index') }}"
+                        class="flex flex-col items-center rounded-lg border p-3 hover:bg-accent">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round" class="h-6 w-6 text-primary">
@@ -101,7 +103,8 @@
                         </svg>
                         <span class="mt-2 text-xs font-medium">Buat Absensi</span>
                     </a>
-                    <a href="" class="flex flex-col items-center rounded-lg border p-3 hover:bg-accent">
+                    <a href="{{ route('absensi.index') }}"
+                        class="flex flex-col items-center rounded-lg border p-3 hover:bg-accent">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round" class="h-6 w-6 text-primary">
@@ -116,7 +119,8 @@
                         </svg>
                         <span class="mt-2 text-xs font-medium">Scan Absen</span>
                     </a>
-                    <a href="" class="flex flex-col items-center rounded-lg border p-3 hover:bg-accent">
+                    <a href="{{ route('absensi-report.index') }}"
+                        class="flex flex-col items-center rounded-lg border p-3 hover:bg-accent">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round" class="h-6 w-6 text-primary">
@@ -137,91 +141,70 @@
 
         <!-- Peserta Overview -->
         <div class="grid gap-4 md:grid-cols-2">
-    <!-- Gender Distribution -->
-    <div class="rounded-lg border bg-card p-6 text-card-foreground shadow-sm">
-        <div class="flex items-center justify-between">
-            <h3 class="text-lg font-medium">Distribusi Jenis Kelamin</h3>
-        </div>
-        <div class="mt-4 flex items-center justify-center">
-            <div class="relative h-40 w-40">
-                <!-- Donut Chart -->
-                @php
-                    $total = count($pesertas);
-                    $malePercentage = $total > 0 ? ($jumlahLakiLaki / $total) * 251.2 : 0;
-                    $femalePercentage = $total > 0 ? ($jumlahPerempuan / $total) * 251.2 : 0;
-                @endphp
-                <svg class="h-full w-full" viewBox="0 0 100 100">
-                    <!-- Male segment -->
-                    <circle cx="50" cy="50" r="40" fill="transparent" stroke="hsl(210, 100%, 60%)"
-                        stroke-width="20" stroke-dasharray="{{ $malePercentage }} 251.2" stroke-dashoffset="0"
-                        transform="rotate(-90 50 50)" />
-                    <!-- Female segment -->
-                    <circle cx="50" cy="50" r="40" fill="transparent" stroke="hsl(340, 100%, 70%)"
-                        stroke-width="20" stroke-dasharray="{{ $femalePercentage }} 251.2" stroke-dashoffset="-{{ $malePercentage }}"
-                        transform="rotate(-90 50 50)" />
-                </svg>
-                <div class="absolute inset-0 flex flex-col items-center justify-center">
-                    <p class="text-sm font-medium">Total</p>
-                    <p class="text-2xl font-bold">{{ $total }}</p>
+            <!-- Gender Distribution -->
+            <div class="rounded-lg border bg-card p-6 text-card-foreground shadow-sm">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-medium">Distribusi Jenis Kelamin</h3>
+                </div>
+                <div class="mt-4 flex items-center justify-center">
+                    <div class="relative h-40 w-40">
+                        <!-- Donut Chart -->
+                        @php
+                            $total = count($pesertas);
+                            $malePercentage = $total > 0 ? ($jumlahLakiLaki / $total) * 251.2 : 0;
+                            $femalePercentage = $total > 0 ? ($jumlahPerempuan / $total) * 251.2 : 0;
+                        @endphp
+                        <svg class="h-full w-full" viewBox="0 0 100 100">
+                            <!-- Male segment -->
+                            <circle cx="50" cy="50" r="40" fill="transparent" stroke="hsl(210, 100%, 60%)"
+                                stroke-width="20" stroke-dasharray="{{ $malePercentage }} 251.2" stroke-dashoffset="0"
+                                transform="rotate(-90 50 50)" />
+                            <!-- Female segment -->
+                            <circle cx="50" cy="50" r="40" fill="transparent" stroke="hsl(340, 100%, 70%)"
+                                stroke-width="20" stroke-dasharray="{{ $femalePercentage }} 251.2"
+                                stroke-dashoffset="-{{ $malePercentage }}" transform="rotate(-90 50 50)" />
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <p class="text-sm font-medium">Total</p>
+                            <p class="text-2xl font-bold">{{ $total }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 flex justify-center gap-6">
+                    <div class="flex items-center gap-2">
+                        <span class="h-3 w-3 rounded-full bg-blue-500"></span>
+                        <span class="text-sm">Laki-laki: {{ $jumlahLakiLaki }}</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="h-3 w-3 rounded-full bg-pink-500"></span>
+                        <span class="text-sm">Perempuan: {{ $jumlahPerempuan }}</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="mt-4 flex justify-center gap-6">
-            <div class="flex items-center gap-2">
-                <span class="h-3 w-3 rounded-full bg-blue-500"></span>
-                <span class="text-sm">Laki-laki: {{ $jumlahLakiLaki }}</span>
-            </div>
-            <div class="flex items-center gap-2">
-                <span class="h-3 w-3 rounded-full bg-pink-500"></span>
-                <span class="text-sm">Perempuan: {{ $jumlahPerempuan }}</span>
-            </div>
-        </div>
-    </div>
 
-    <!-- Attendance Overview -->
-    <div class="rounded-lg border bg-card p-6 text-card-foreground shadow-sm">
-        <div class="flex items-center justify-between">
-            <h3 class="text-lg font-medium">Ringkasan Kehadiran</h3>
-        </div>
-        <div class="mt-4 space-y-4">
-            <div class="space-y-2">
-                <div class="flex items-center justify-between text-sm">
-                    <span>Pengenalan Sistem Informasi</span>
-                    <span class="font-medium">71%</span>
+            <!-- Attendance Overview -->
+            <div class="rounded-lg border bg-card p-6 text-card-foreground shadow-sm">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-medium">Ringkasan Kehadiran</h3>
                 </div>
-                <div class="h-2 w-full rounded-full bg-secondary">
-                    <div class="h-full rounded-full bg-primary" style="width: 71%"></div>
-                </div>
-            </div>
-            <div class="space-y-2">
-                <div class="flex items-center justify-between text-sm">
-                    <span>Dasar Pemrograman Web</span>
-                    <span class="font-medium">77%</span>
-                </div>
-                <div class="h-2 w-full rounded-full bg-secondary">
-                    <div class="h-full rounded-full bg-primary" style="width: 77%"></div>
-                </div>
-            </div>
-            <div class="space-y-2">
-                <div class="flex items-center justify-between text-sm">
-                    <span>Database Management</span>
-                    <span class="font-medium">65%</span>
-                </div>
-                <div class="h-2 w-full rounded-full bg-secondary">
-                    <div class="h-full rounded-full bg-primary" style="width: 65%"></div>
-                </div>
-            </div>
-            <div class="space-y-2">
-                <div class="flex items-center justify-between text-sm">
-                    <span>UI/UX Design</span>
-                    <span class="font-medium">0%</span>
-                </div>
-                <div class="h-2 w-full rounded-full bg-secondary">
-                    <div class="h-full rounded-full bg-primary" style="width: 0%"></div>
+                <div class="mt-4 space-y-4">
+                    @foreach ($materis as $materi)
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between text-sm">
+                                <div>
+                                    <span class="block">{{ $materi->nama }}</span>
+                                    <span class="block text-xs text-gray-500">{{ $materi->deskripsi }}</span>
+                                </div>
+                                <span class="font-medium">{{ $materi->persentase }}%</span>
+                            </div>
+                            <div class="h-2 w-full rounded-full bg-secondary">
+                                <div class="h-full rounded-full bg-primary" style="width: {{ $materi->persentase }}%">
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
-    </div>
-</div>
     </div>
 @endsection

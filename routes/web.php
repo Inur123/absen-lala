@@ -6,6 +6,7 @@ use App\Http\Controllers\MateriController;
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AbsensiReportController;
 
 // Redirect root to /login
 Route::redirect('/', '/login');
@@ -25,6 +26,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('absensi', AbsensiController::class);
     Route::post('absensi/scan', [AbsensiController::class, 'scanQr'])->name('absensi.scan');
     Route::get('/absensi/scan/{materi}', [AbsensiController::class, 'showScanPage'])->name('absensi.scan.page');
+    Route::get('/absensi-report', [AbsensiReportController::class, 'index'])->name('absensi-report.index');
 });
 
 
