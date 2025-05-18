@@ -31,18 +31,18 @@
             </p>
 
             <div class="mt-4 flex justify-end space-x-2">
-    <!-- Tombol Batal -->
-    <button type="button" @click="showLogoutModal = false"
-        class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition-colors hover:bg-gray-100 hover:text-black focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 cursor-pointer">
-        Batal
-    </button>
+                <!-- Tombol Batal -->
+                <button type="button" @click="showLogoutModal = false"
+                    class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition-colors hover:bg-gray-100 hover:text-black focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 cursor-pointer">
+                    Batal
+                </button>
 
-    <!-- Tombol Logout dengan warna merah -->
-    <button type="button" onclick="document.getElementById('logout-form').submit()"
-        class="inline-flex items-center justify-center whitespace-nowrap rounded-md bg-black px-4 py-2 text-sm font-medium text-white shadow transition-colors hover:bg-gray-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-400 disabled:pointer-events-none disabled:opacity-50 cursor-pointer">
-        Logout
-    </button>
-</div>
+                <!-- Tombol Logout dengan warna merah -->
+                <button type="button" onclick="document.getElementById('logout-form').submit()"
+                    class="inline-flex items-center justify-center whitespace-nowrap rounded-md bg-black px-4 py-2 text-sm font-medium text-white shadow transition-colors hover:bg-gray-700 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-400 disabled:pointer-events-none disabled:opacity-50 cursor-pointer">
+                    Logout
+                </button>
+            </div>
 
         </div>
     </div>

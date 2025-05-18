@@ -55,14 +55,15 @@
             @foreach ($materis as $materi)
                 <div class="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden">
                     <div class="p-6 flex flex-col space-y-4">
-                        <div class="flex items-center justify-between">
+                        <div class="flex flex-col space-y-1">
                             <h3 class="font-semibold tracking-tight">
                                 {{ $materi->nama }}
                             </h3>
+                            <p class="text-sm text-slate-500">
+                                {{ $materi->deskripsi ?? 'Tidak ada deskripsi' }}
+                            </p>
                         </div>
-                        <p class="text-sm text-slate-500">
-                            {{ $materi->deskripsi ?? 'Tidak ada deskripsi' }}
-                        </p>
+
 
                         <div class="mt-2 flex items-center justify-end gap-2">
                             <button @click="openEditModal(@js($materi))"

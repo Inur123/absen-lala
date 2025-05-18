@@ -8,10 +8,10 @@
     editData: {},
     showLogoutModal: false,
     toggleSidebar() {
-      this.sidebarOpen = !this.sidebarOpen;
+        this.sidebarOpen = !this.sidebarOpen;
     },
-  }"
->
+}">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -41,4 +41,5 @@
     <div x-show="sidebarOpen" @click="sidebarOpen = false"
         class="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm lg:hidden"></div>
 </body>
+
 </html>

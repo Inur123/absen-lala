@@ -7,20 +7,18 @@
                 <h1 class="text-2xl font-bold tracking-tight">Peserta</h1>
                 <p class="text-muted-foreground">Kelola data peserta kegiatan.</p>
             </div>
-           <button
-    @click="showAddModal = true"
-    class="inline-flex items-center justify-center whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 cursor-pointer bg-black text-white"title="Tambah Peserta"
->
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-        class="mr-2 h-4 w-4">
-        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M22 12h-4" />
-        <path d="M20 10v4" />
-    </svg>
-    Tambah Peserta
-</button>
+            <button @click="showAddModal = true"
+                class="inline-flex items-center justify-center whitespace-nowrap rounded-md px-4 py-2 text-sm font-medium shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 cursor-pointer bg-black text-white"title="Tambah Peserta">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="mr-2 h-4 w-4">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M22 12h-4" />
+                    <path d="M20 10v4" />
+                </svg>
+                Tambah Peserta
+            </button>
 
         </div>
 

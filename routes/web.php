@@ -27,6 +27,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('absensi/scan', [AbsensiController::class, 'scanQr'])->name('absensi.scan');
     Route::get('/absensi/scan/{materi}', [AbsensiController::class, 'showScanPage'])->name('absensi.scan.page');
     Route::get('/absensi-report', [AbsensiReportController::class, 'index'])->name('absensi-report.index');
+    Route::get('/absensi-report/export/{materi}', [AbsensiReportController::class, 'exportPdf'])->name('absensi-report.export');
 });
 
 
