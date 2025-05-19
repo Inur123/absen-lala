@@ -17,6 +17,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@yield('title', 'Admin System')</title>
     <link rel="icon" href="{{ asset('images/logo-lala.png') }}" type="image/x-icon" />
+    <meta property="og:title" content="lala25.zainur.my.id - Sistem Absensi Latin Latpel PC IPNU IPPNU Magetan" />
+    <meta property="og:description" content="Sistem Absensi LATIN-LATPEL untuk PC IPNU IPPNU Magetan" />
+    <meta property="og:url" content="https://lala25.zainur.my.id/login" />
+    <meta property="og:type" content="website" />
     @vite(['resources/js/app.js', 'resources/css/app.css'])
 </head>
 

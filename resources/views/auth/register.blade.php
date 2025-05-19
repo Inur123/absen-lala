@@ -9,6 +9,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <meta property="og:title" content="lala25.zainur.my.id - Sistem Absensi Latin Latpel PC IPNU IPPNU Magetan" />
+    <meta property="og:description" content="Sistem Absensi LATIN-LATPEL untuk PC IPNU IPPNU Magetan" />
+    <meta property="og:url" content="https://lala25.zainur.my.id/login" />
+    <meta property="og:type" content="website" />
     <style>
         body {
             background-color: #f8fafc;

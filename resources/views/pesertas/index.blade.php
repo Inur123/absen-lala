@@ -95,68 +95,68 @@
 
     <!-- Add Modal -->
     <div x-show="showAddModal" class="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm"
-        x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
-        x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
-        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
-        <div class="w-full max-w-md rounded-lg border bg-card p-6 shadow-lg"
-            x-transition:enter="transition ease-out duration-300" x-transition:enter-start="transform scale-95 opacity-0"
-            x-transition:enter-end="transform scale-100 opacity-100" x-transition:leave="transition ease-in duration-200"
-            x-transition:leave-start="transform scale-100 opacity-100"
-            x-transition:leave-end="transform scale-95 opacity-0">
-            <div class="flex flex-col space-y-4">
-                <div class="flex items-center space-x-2">
-                    <div class="rounded-full bg-primary/10 p-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="h-4 w-4 text-primary">
-                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                            <circle cx="9" cy="7" r="4" />
-                            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-semibold">Tambah Peserta Baru</h3>
+    x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
+    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+    <div class="w-full max-w-md rounded-lg border bg-card p-6 shadow-lg bg-white"
+        x-transition:enter="transition ease-out duration-300" x-transition:enter-start="transform scale-95 opacity-0"
+        x-transition:enter-end="transform scale-100 opacity-100" x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="transform scale-100 opacity-100"
+        x-transition:leave-end="transform scale-95 opacity-0">
+        <div class="flex flex-col space-y-4">
+            <div class="flex items-center space-x-2">
+                <div class="rounded-full bg-primary/10 p-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="h-4 w-4 text-primary">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
                 </div>
-                <form action="{{ route('peserta.store') }}" method="POST">
-                    @csrf
-                    <div class="grid gap-4">
-                        <div class="grid gap-2">
-                            <label for="nama" class="text-sm font-medium">Nama Lengkap</label>
-                            <input type="text" id="nama" name="nama"
-                                class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-                                placeholder="Masukkan nama lengkap" required />
-                        </div>
-                        <div class="grid gap-2">
-                            <label for="delegasi" class="text-sm font-medium">Asal Delegasi</label>
-                            <input type="text" id="delegasi" name="asal_delegasi"
-                                class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-                                placeholder="Masukkan asal delegasi" required />
-                        </div>
-                        <div class="grid gap-2">
-                            <label for="jenisKelamin" class="text-sm font-medium">Jenis Kelamin</label>
-                            <select id="jenisKelamin" name="jenis_kelamin"
-                                class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-                                required>
-                                <option value="" disabled selected>Pilih Jenis Kelamin</option>
-                                <option value="Laki-Laki">Laki-laki</option>
-                                <option value="Perempuan">Perempuan</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="mt-4 flex justify-end space-x-2">
-                        <button type="button" @click="showAddModal = false"
-                            class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 cursor-pointer">
-                            Batal
-                        </button>
-                        <button type="submit"
-                            class="inline-flex items-center justify-center whitespace-nowrap rounded-md bg-black px-4 py-2 text-sm font-medium text-white shadow transition-colors hover:bg-gray-800 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 cursor-pointer">
-                            Tambah Peserta
-                        </button>
-                    </div>
-                </form>
+                <h3 class="text-lg font-semibold">Tambah Peserta Baru</h3>
             </div>
+            <form action="{{ route('peserta.store') }}" method="POST">
+                @csrf
+                <div class="grid gap-4">
+                    <div class="grid gap-2">
+                        <label for="nama" class="text-sm font-medium">Nama Lengkap</label>
+                        <input type="text" id="nama" name="nama"
+                            class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                            placeholder="Masukkan nama lengkap" required />
+                    </div>
+                    <div class="grid gap-2">
+                        <label for="delegasi" class="text-sm font-medium">Asal Delegasi</label>
+                        <input type="text" id="delegasi" name="asal_delegasi"
+                            class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                            placeholder="Masukkan asal delegasi" required />
+                    </div>
+                    <div class="grid gap-2">
+                        <label for="jenisKelamin" class="text-sm font-medium">Jenis Kelamin</label>
+                        <select id="jenisKelamin" name="jenis_kelamin"
+                            class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                            required>
+                            <option value="" disabled selected>Pilih Jenis Kelamin</option>
+                            <option value="Laki-Laki">Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-4 flex justify-end space-x-2">
+                    <button type="button" @click="showAddModal = false"
+                        class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 cursor-pointer">
+                        Batal
+                    </button>
+                    <button type="submit"
+                        class="inline-flex items-center justify-center whitespace-nowrap rounded-md bg-black px-4 py-2 text-sm font-medium text-white shadow transition-colors hover:bg-gray-800 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 cursor-pointer">
+                        Tambah Peserta
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 
     <!-- Edit Modal -->
     <div x-show="showEditModal"
@@ -164,7 +164,7 @@
         x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
-        <div class="w-full max-w-md rounded-lg border bg-card p-6 shadow-lg"
+        <div class="w-full max-w-md rounded-lg border bg-card p-6 shadow-lg bg-white"
             x-transition:enter="transition ease-out duration-300" x-transition:enter-start="transform scale-95 opacity-0"
             x-transition:enter-end="transform scale-100 opacity-100" x-transition:leave="transition ease-in duration-200"
             x-transition:leave-start="transform scale-100 opacity-100"
