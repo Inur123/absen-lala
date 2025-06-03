@@ -39,9 +39,9 @@
                         </tr>
                     </thead>
                     <tbody class="[&_tr:last-child]:border-0">
-                        @foreach ($pesertas as $index => $peserta)
+                      @foreach ($pesertas as $peserta)
                             <tr class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-                                <td class="p-4 align-middle">{{ $index + 1 }}</td>
+                                <td class="p-4 align-middle">{{ ($pesertas->currentPage() - 1) * $pesertas->perPage() + $loop->iteration }}</td>
                                 <td class="p-4 align-middle">
                                     <img src="{{ asset('storage/' . $peserta->qrcode) }}" alt="QR Code"
                                         class="w-24 h-24 object-contain">
@@ -90,8 +90,47 @@
                     </tbody>
                 </table>
             </div>
+          <div class="flex items-center justify-between px-4 py-4 border-t">
+    <div class="text-sm text-muted-foreground">
+        Menampilkan <span>{{ $pesertas->firstItem() }}</span>-<span>{{ $pesertas->lastItem() }}</span> dari <span>{{ $pesertas->total() }}</span> peserta
+    </div>
+    <div class="flex items-center gap-2">
+        {{-- Previous Page Link --}}
+        @if ($pesertas->onFirstPage())
+            <button disabled class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-input bg-background px-3 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
+                    <path d="m15 18-6-6 6-6" />
+                </svg>
+            </button>
+        @else
+            <a href="{{ $pesertas->previousPageUrl() }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-input bg-background px-3 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
+                    <path d="m15 18-6-6 6-6" />
+                </svg>
+            </a>
+        @endif
+
+        <span class="text-sm">{{ $pesertas->currentPage() }}/{{ $pesertas->lastPage() }}</span>
+
+        {{-- Next Page Link --}}
+        @if ($pesertas->hasMorePages())
+            <a href="{{ $pesertas->nextPageUrl() }}" class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-input bg-background px-3 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
+                    <path d="m9 18 6-6-6-6" />
+                </svg>
+            </a>
+        @else
+            <button disabled class="inline-flex items-center justify-center whitespace-nowrap rounded-md border border-input bg-background px-3 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
+                    <path d="m9 18 6-6-6-6" />
+                </svg>
+            </button>
+        @endif
+    </div>
+</div>
         </div>
     </div>
+
 
     <!-- Add Modal -->
     <div x-show="showAddModal" class="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm"
